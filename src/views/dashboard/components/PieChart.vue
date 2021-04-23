@@ -5,7 +5,7 @@
 
 <script>
 // 引入
-import echarts from 'echarts'
+import * as echarts from 'echarts';
 // 引入主题
 require('echarts/theme/macarons')
 
@@ -13,6 +13,8 @@ require('echarts/theme/macarons')
 import resize from './mixins/resize'
 
 export default {
+
+
     mixins: [resize],
 
     props: {
@@ -61,7 +63,7 @@ export default {
         if(!this.chart) {
             return
         }
-        // 注销实例 
+        // 注销实例
         this.chart.dispose()
         this.chart = null
     },
@@ -94,7 +96,7 @@ export default {
                         radius: '55%', // 圆大小
                         center: ['50%', '50%'], // 饼图位置【左，上】
                         data: this.seriesData,
-                        emphasis: { 
+                        emphasis: {
                             itemStyle: {
                                 shadowBlur: 10, // 图形阴影的模糊大小
                                 shadowOffsetX: 0, // 阴影水平方向偏移距离

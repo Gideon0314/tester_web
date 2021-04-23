@@ -4,7 +4,7 @@
 
 <script>
 
-import echarts from 'echarts'
+import * as echarts from 'echarts';
 // 引入主题
 require('echarts/theme/macarons')
 
@@ -55,7 +55,7 @@ export default {
         if(!this.chart) {
             return
         }
-        // 注销实例 
+        // 注销实例
         this.chart.dispose()
         this.chart = null
     },
@@ -64,11 +64,11 @@ export default {
     methods: {
         initChart() {
             // 初始化echarts实例，第2个参数是主题
-          this.chart = echarts.init(this.$refs.main, 'macarons')  
+          this.chart = echarts.init(this.$refs.main, 'macarons')
           this.chart.setOption({
             // color: ['#3398DB'],
             title: { // 标题
-                text: '近6个月发布的文章数',     
+                text: '近6个月发布的文章数',
                 left: 'center'
             },
             tooltip: { // 提示框
