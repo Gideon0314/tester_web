@@ -32,7 +32,7 @@ export default {
         },
         legendData: { // 左侧组件接收的数据
             type: Array,
-            default: () => ['前端', 'Java', '移动端', '大数据']
+            default: () => ['前端', 'Java', '移动端', '大数据', '测试']
         },
         seriesData: { // 饼状图中接收的数据
             type: Array,
@@ -41,6 +41,7 @@ export default {
                 {value: 200, name: 'Java'},
                 {value: 500, name: '移动端'},
                 {value: 300, name: '大数据'},
+                {value: 200, name: '测试'},
             ]
         }
     },
