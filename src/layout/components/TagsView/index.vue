@@ -1,4 +1,3 @@
-<script src="../../../../../../BOOK/vue-element-admin博客权限管理系统资料/02-课堂源码/mengxuegu-blog-admin/src/layout/components/index.js"></script>
 <template>
   <div id="tags-view-container" class="tags-view-container">
     <scroll-pane ref="scrollPane" class="tags-view-wrapper" @scroll="handleScroll">
@@ -46,8 +45,7 @@ export default {
       return this.$store.state.tagsView.visitedViews
     },
     routes() {
-      // return this.$store.state.permission.routes
-      return this.$routes.options.routes
+      return this.$router.options.routes
     }
   },
   watch: {
