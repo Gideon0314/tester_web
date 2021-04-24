@@ -24,23 +24,24 @@
       border
       fit
       highlight-current-row
-      style="width: 100%;border: 2px"
+      :show-overflow-tooltip="true"
+      style="width: 100%;font-weight:550"
     >
       <el-table-column label="ID" prop="id" align="center" width="80">
         <template slot-scope="scope">
           <span>{{ scope.$index + 1 }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="项目" width="200px" align="center">
+      <el-table-column label="项目" min-width="190px" align="center">
         <template slot-scope="{row}">
           <span class="link-type" @click="handleUpdate(row)">{{ row.project }}</span>
           &emsp;
           <el-tag>{{ row.env | envFilter }}</el-tag>
         </template>
       </el-table-column>
-      <el-table-column label="项目地址" min-width="110px" align="center">
+      <el-table-column label="项目地址" min-width="350px" align="center">
         <template slot-scope="{row}">
-          <span>{{ row.swagger_url }}</span>
+          <a :href="row.swagger_url" target="_Blank">{{ row.swagger_url }}</a>
         </template>
       </el-table-column>
       <el-table-column label="版本" width="100px" align="center">
@@ -49,13 +50,13 @@
           <span v-else>-</span>
         </template>
       </el-table-column>
-      <el-table-column label="更新时间" width="120px" align="center">
+      <el-table-column label="更新时间" width="100px" align="center">
         <template slot-scope="{row}">
           <span v-if="row.updated_at">{{ row.updated_at }}</span>
           <span v-else>-</span>
         </template>
       </el-table-column>
-      <el-table-column label="状态" class-name="status-col" width="100" align="center">
+      <el-table-column label="状态" class-name="status-col" width="80px" align="center">
         <template slot-scope="{row}">
           <el-tag :type="row.status | statusFilter">
             {{ row.status | statusFilter }}
@@ -106,10 +107,10 @@ import waves from '@/directive/waves' // waves directive
 import Pagination from '@/components/Pagination' // secondary package based on el-pagination
 
 const calendarTypeOptions = [
-  { key: '0', display_name: '开发环境' },
-  { key: '1', display_name: '测试环境' },
-  { key: '2', display_name: '预生产环境' },
-  { key: '3', display_name: '生产环境' }
+  { key: '0', display_name: 'DEV' },
+  { key: '1', display_name: 'TEST' },
+  { key: '2', display_name: 'PRE' },
+  { key: '3', display_name: 'PROD' }
 ]
 
 const calendarTypeKeyValue = calendarTypeOptions.reduce((acc, cur) => {
@@ -191,7 +192,7 @@ export default {
         // Just to simulate the time of the request
         setTimeout(() => {
           this.listLoading = false
-        }, 1.5 * 1000)
+        }, 1.5 * 100)
       })
     },
     handleFilter() {
@@ -311,7 +312,12 @@ export default {
 </script>
 <style>
  .el-table {
-    border: 1px solid rgb(68, 67, 67);
-    border-right: none;
+    border: 1px solid #dfe6ec;
   }
+ .el-table td{
+   border: 1px solid #dfe6ec;
+ }
+ .el-table th{
+   border: 1px solid #dfe6ec;
+ }
 </style>
