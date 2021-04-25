@@ -82,7 +82,12 @@ export default {
         },
         tooltip: { // 鼠标放上去的提示框格式
           trigger: 'item',
-          formatter: '{a} <br/>{b} : {c} ({d}%)'
+          formatter: '{a} <br/>{b} : {c} ({d}%)',
+          textStyle : {
+            color: 'white',
+            fontSize: 13,
+            fontWeight: 'bold'
+        },
         },
         legend: { // 左上角
           orient: 'vertical',
