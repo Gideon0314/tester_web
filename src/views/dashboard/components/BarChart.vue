@@ -75,6 +75,7 @@ export default {
       this.chart = echarts.init(this.$el, 'macarons')
 
       this.chart.setOption({
+        // backgroundColor: '#E6EEEE',
         animation: false,
         title: { // 标题
           text: '近5日发版次数统计',

@@ -76,6 +76,7 @@ export default {
 
       // 图标配置项
       this.chart.setOption({
+        // backgroundColor: '#E6EEEE',
         title: { // 标题
           text: '近5日BUG统计',
           left: 'center' // 居中

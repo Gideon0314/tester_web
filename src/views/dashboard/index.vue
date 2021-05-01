@@ -7,6 +7,7 @@
       :dtotal="dtotal"
     />
     <el-row :gutter="40">
+
       <el-col :xs="24" :sm="24" :lg="12">
         <el-card>
           <!-- 饼状图： 各技术频道文章统计 -->
@@ -17,6 +18,7 @@
           />
         </el-card>
       </el-col>
+
       <el-col :xs="24" :sm="24" :lg="12">
         <el-card>
           <!-- 柱状图： 近6个月发布的文章数 -->
