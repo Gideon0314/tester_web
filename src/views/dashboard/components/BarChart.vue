@@ -23,14 +23,30 @@ export default {
     height: {
       type: String,
       default: '300px'
+    },
+    xAxisData: { // x轴显示的年月
+      type: Array,
+      default: () => ['Mon', 'Tue', 'Wed', 'Thu', 'Fri']
+    },
+    seriesData: { // 柱状数据
+      type: Array,
+      default: () => [
+        { data: [1, 2, 3, 4, 5, 5, 6], name: '全球赢' },
+        { data: [1, 2, 3, 4, 5, 5, 6], name: 'Ework' },
+        { data: [1, 2, 3, 4, 5, 5, 6], name: 'SkyCloud' },
+        { data: [1, 2, 3, 4, 5, 5, 6], name: 'SkyTree' },
+        { data: [1, 2, 3, 4, 5, 5, 6], name: '智能投放' }
+      ]
     }
   },
   data() {
     return {
-      chart: null
+      chart: null,
+      series: []
     }
   },
   mounted() {
+    this.handleSeries()
     this.$nextTick(() => {
       this.initChart()
     })
@@ -43,6 +59,18 @@ export default {
     this.chart = null
   },
   methods: {
+    handleSeries() {
+      for (var i = 0; i < this.seriesData.length; i++) {
+        this.series.push({
+          name: this.seriesData[i].name,
+          type: 'bar',
+          stack: 'vistors',
+          barWidth: '60%',
+          data: this.seriesData[i].data,
+          animationDuration
+        })
+      }
+    },
     initChart() {
       this.chart = echarts.init(this.$el, 'macarons')
 
@@ -57,11 +85,11 @@ export default {
           axisPointer: { // 坐标轴指示器，坐标轴触发有效
             type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
           },
-          textStyle : {
-          color: 'white',
-          fontSize: 13,
-          fontWeight: 'bold'
-        },
+          textStyle: {
+            color: 'white',
+            fontSize: 13,
+            fontWeight: 'bold'
+          }
         },
         grid: {
           top: 50,
@@ -72,7 +100,7 @@ export default {
         },
         xAxis: [{
           type: 'category',
-          data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'],
+          data: this.xAxisData,
           axisTick: {
             alignWithLabel: true
           }
@@ -83,43 +111,7 @@ export default {
             show: false
           }
         }],
-        series: [{
-          name: 'pageA',
-          type: 'bar',
-          stack: 'vistors',
-          barWidth: '60%',
-          data: [10, 8, 5, 3, 5, 9, 10],
-          animationDuration
-        }, {
-          name: 'pageB',
-          type: 'bar',
-          stack: 'vistors',
-          barWidth: '60%',
-          data: [5, 7, 11, 8, 2, 3, 10],
-          animationDuration
-        }, {
-          name: 'pageC',
-          type: 'bar',
-          stack: 'vistors',
-          barWidth: '60%',
-          data: [2, 6, 9, 5, 2, 3, 7],
-          animationDuration
-        }, {
-          name: 'pageD',
-          type: 'bar',
-          stack: 'vistors',
-          barWidth: '60%',
-          data: [2, 6, 9, 5, 2, 3, 7],
-          animationDuration
-        }, {
-          name: 'pageE',
-          type: 'bar',
-          stack: 'vistors',
-          barWidth: '60%',
-          data: [2, 6, 9, 5, 2, 3, 7],
-          animationDuration
-        }
-        ]
+        series: this.series
       })
     }
   }
