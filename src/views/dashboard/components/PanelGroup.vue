@@ -7,25 +7,13 @@
         </div>
         <div class="card-panel-description">
           <div class="card-panel-text">
-            累计测试任务
+            本周任务数
           </div>
           <count-to :start-val="0" :end-val="atotal" :duration="2600" class="card-panel-num" />
         </div>
       </div>
     </el-col>
-    <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
-      <div class="card-panel">
-        <div class="card-panel-icon-wrapper icon-message">
-          <svg-icon icon-class="bug" class-name="card-panel-icon" />
-        </div>
-        <div class="card-panel-description">
-          <div class="card-panel-text">
-            累计BUG
-          </div>
-          <count-to :start-val="0" :end-val="btotal" :duration="3000" class="card-panel-num" />
-        </div>
-      </div>
-    </el-col>
+
     <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
       <div class="card-panel">
         <div class="card-panel-icon-wrapper icon-money">
@@ -33,7 +21,7 @@
         </div>
         <div class="card-panel-description">
           <div class="card-panel-text">
-            累计发版次数
+            本周发版次数
           </div>
           <count-to :start-val="0" :end-val="ctotal" :duration="3200" class="card-panel-num" />
         </div>
@@ -49,6 +37,19 @@
             累计BUG
           </div>
           <count-to :start-val="0" :end-val="dtotal" :duration="3600" class="card-panel-num" />
+        </div>
+      </div>
+    </el-col>
+    <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
+      <div class="card-panel">
+        <div class="card-panel-icon-wrapper icon-message">
+          <svg-icon icon-class="bug" class-name="card-panel-icon" />
+        </div>
+        <div class="card-panel-description">
+          <div class="card-panel-text">
+            本周新增BUG
+          </div>
+          <count-to :start-val="0" :end-val="btotal" :duration="3000" class="card-panel-num" />
         </div>
       </div>
     </el-col>
