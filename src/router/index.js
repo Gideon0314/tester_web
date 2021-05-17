@@ -70,11 +70,27 @@ export const constantRoutes = [
         component: () => import('@/views/project/index'),
         meta: { title: '项目管理', icon: 'table' }
       },
+      // {
+      //   path: 'project',
+      //   name: 'project',
+      //   component: () => import('@/views/project/index'),
+      //   meta: { title: '接口测试', icon: 'table' }
+      // }
+    ]
+  },
+  {
+
+    path: '/task',
+    component: Layout,
+    redirect: '/task',
+    name: 'task',
+    meta: { title: '定时任务', icon: 'el-icon-s-help' },
+    children: [
       {
-        path: 'project',
-        name: 'project',
+        path: 'taskList',
+        name: '定时任务',
         component: () => import('@/views/project/index'),
-        meta: { title: '接口测试', icon: 'table' }
+        meta: { title: '定时任务', icon: 'table' }
       }
     ]
   },
