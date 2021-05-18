@@ -89,7 +89,7 @@ export const constantRoutes = [
       {
         path: 'taskList',
         name: '定时任务',
-        component: () => import('@/views/project/index'),
+        component: () => import('@/views/apscheduler/index'),
         meta: { title: '定时任务', icon: 'table' }
       }
     ]
