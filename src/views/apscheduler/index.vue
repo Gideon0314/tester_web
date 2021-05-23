@@ -85,7 +85,7 @@
 </template>
 
 <script>
-import api from '@/api/project'
+import api from '@/api/task'
 import waves from '@/directive/waves' // waves directive
 import Pagination from '@/components/Pagination' // secondary package based on el-pagination
 
@@ -103,7 +103,7 @@ const calendarTypeKeyValue = calendarTypeOptions.reduce((acc, cur) => {
 
 const statusOptions = [
   { key: '0', display_name: '待开始' },
-  { key: '1', display_name: '运行中' },
+  { key: '1', display_name: '运行中' }
 ]
 
 const statusKeyValue = statusOptions.reduce((acc, cur) => {
