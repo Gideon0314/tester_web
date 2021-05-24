@@ -8,24 +8,25 @@ export default {
       params: query
     })
   },
-  resumeTask() {
+  resumeTask(query) {
     return request({
-      url: '/resume/task/:id(\\\\d+)',
-      method: 'get'
-    })
-  },
-  pauseTask() {
-    return request({
-      url: '/pause/task/:id(\\d+)',
+      url: '/resume/task',
       method: 'get',
-      data
+      params: query
     })
   },
-  deleteProject(data) {
+  pauseTask(query) {
+    return request({
+      url: '/pause/task',
+      method: 'get',
+      params: query
+    })
+  },
+  deleteTask(query) {
     return request({
       url: '/task/delete',
       method: 'delete',
-      data
+      params: query
     })
   }
 }

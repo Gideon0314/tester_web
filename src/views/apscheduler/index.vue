@@ -53,31 +53,33 @@
 
       <el-table-column label="操作" align="center" width="230" class-name="small-padding fixed-width">
         <template slot-scope="{row}">
-          <el-button v-if="row.status!='1'" size="mini" type="success" @click="startTask(row)">
+
+          <el-button v-if="row.status!=1" size="mini" type="success" @click="handleResumeTask(row)">
             开始
           </el-button>
-          <el-button size="mini" type="danger" @click="handlePauseTask(row)">
+          <el-button v-if="row.status!=0" size="mini" type="danger" @click="handlePauseTask(row)">
             停止
           </el-button>
+
         </template>
       </el-table-column>
 
-<!--      <el-table-column label="Actions" align="center" width="230" class-name="small-padding fixed-width">-->
-<!--        <template slot-scope="{row,$index}">-->
-<!--          <el-button type="primary" size="mini" @click="handleUpdate(row)">-->
-<!--            Edit-->
-<!--          </el-button>-->
-<!--          <el-button v-if="row.status!='published'" size="mini" type="success" @click="handleModifyStatus(row,'published')">-->
-<!--            Publish-->
-<!--          </el-button>-->
-<!--          <el-button v-if="row.status!='draft'" size="mini" @click="handleModifyStatus(row,'draft')">-->
-<!--            Draft-->
-<!--          </el-button>-->
-<!--          <el-button v-if="row.status!='deleted'" size="mini" type="danger" @click="handleDelete(row,$index)">-->
-<!--            Delete-->
-<!--          </el-button>-->
-<!--        </template>-->
-<!--      </el-table-column>-->
+      <!--      <el-table-column label="Actions" align="center" width="230" class-name="small-padding fixed-width">-->
+      <!--        <template slot-scope="{row,$index}">-->
+      <!--          <el-button type="primary" size="mini" @click="handleUpdate(row)">-->
+      <!--            Edit-->
+      <!--          </el-button>-->
+      <!--          <el-button v-if="row.status!='published'" size="mini" type="success" @click="handleModifyStatus(row,'published')">-->
+      <!--            Publish-->
+      <!--          </el-button>-->
+      <!--          <el-button v-if="row.status!='draft'" size="mini" @click="handleModifyStatus(row,'draft')">-->
+      <!--            Draft-->
+      <!--          </el-button>-->
+      <!--          <el-button v-if="row.status!='deleted'" size="mini" type="danger" @click="handleDelete(row,$index)">-->
+      <!--            Delete-->
+      <!--          </el-button>-->
+      <!--        </template>-->
+      <!--      </el-table-column>-->
 
     </el-table>
     <pagination v-show="total>0" :total="total" :page.sync="listQuery.page" :limit.sync="listQuery.limit" @pagination="getList" />
@@ -205,23 +207,52 @@ export default {
       })
         .then(async() => {
           const data = {
-            'id': row.id
+            'task_id': row.task_id
           }
           row.status = status
-          api.pauseTask(row.task_id).then(response => {
-          this.status = response.data.status
-          // Just to simulate the time of the request
-          setTimeout(() => {
-            this.listLoading = false
-          }, 1.5 * 100)
+          api.pauseTask(data).then(response => {
+            row.status = 0
+            // Just to simulate the time of the request
+            setTimeout(() => {
+              this.listLoading = false
+            }, 1.5 * 100)
           })
           // await test.test()
-          // this.getList()
+          this.getList()
           // setTimeout(() => {
           // }, 1.5 * 100)
           this.$message({
             type: 'success',
-            message: '获取成功'
+            message: '定时任务暂停成功'
+          })
+        })
+        .catch(err => { console.error(err) })
+    },
+    handleResumeTask(row, status) {
+      this.$confirm('开始任务', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'info'
+      })
+        .then(async() => {
+          const data = {
+            'task_id': row.task_id
+          }
+          row.status = status
+          api.resumeTask(data).then(response => {
+            row.status = 0
+            // Just to simulate the time of the request
+            setTimeout(() => {
+              this.listLoading = false
+            }, 1.5 * 100)
+          })
+          // await test.test()
+          this.getList()
+          // setTimeout(() => {
+          // }, 1.5 * 100)
+          this.$message({
+            type: 'success',
+            message: '定时任务开始运行'
           })
         })
         .catch(err => { console.error(err) })
