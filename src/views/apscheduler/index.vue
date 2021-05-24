@@ -196,7 +196,7 @@ export default {
         project: '',
         env: '',
         swagger_url: '',
-        status: 0
+        status: ''
       }
     },
     handlePauseTask(row, status) {
@@ -211,14 +211,15 @@ export default {
           }
           row.status = status
           api.pauseTask(data).then(response => {
+            this.getList()
             row.status = 0
             // Just to simulate the time of the request
-            setTimeout(() => {
-              this.listLoading = false
-            }, 1.5 * 100)
+            // setTimeout(() => {
+            //   this.listLoading = false
+            // }, 1.5 * 100)
           })
           // await test.test()
-          this.getList()
+          // this.getList()
           // setTimeout(() => {
           // }, 1.5 * 100)
           this.$message({
@@ -240,14 +241,15 @@ export default {
           }
           row.status = status
           api.resumeTask(data).then(response => {
-            row.status = 0
+            this.getList()
+            row.status = 1
             // Just to simulate the time of the request
-            setTimeout(() => {
-              this.listLoading = false
-            }, 1.5 * 100)
+            // setTimeout(() => {
+            //   this.listLoading = false
+            // }, 1.5 * 100)
           })
           // await test.test()
-          this.getList()
+          // this.getList()
           // setTimeout(() => {
           // }, 1.5 * 100)
           this.$message({
