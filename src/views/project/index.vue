@@ -65,7 +65,7 @@
       </el-table-column>
       <el-table-column label="操作" align="center" width="230" class-name="small-padding fixed-width">
         <template slot-scope="{row}">
-          <el-button v-if="row.status!='1'" size="mini" type="success">
+          <el-button v-if="row.status!='1'" size="mini" type="success" @click="handleGetApiDocs(row)">
             获取
           </el-button>
           <el-button size="mini" type="danger" @click="handleDelete(row)">
@@ -102,6 +102,7 @@
 </template>
 
 <script>
+import test from '@/api/test'
 import api from '@/api/project'
 import waves from '@/directive/waves' // waves directive
 import Pagination from '@/components/Pagination' // secondary package based on el-pagination
@@ -217,10 +218,19 @@ export default {
             'id': row.id
           }
           row.status = status
-          await api.getProjectApiDocs(data)
-          this.getList()
+          api.getList(this.listQuery).then(response => {
+          this.list = response.data.items
+          this.total = response.data.total
+          this.status = response.data.status
+          // Just to simulate the time of the request
           setTimeout(() => {
+            this.listLoading = false
           }, 1.5 * 100)
+          })
+          // await test.test()
+          // this.getList()
+          // setTimeout(() => {
+          // }, 1.5 * 100)
           this.$message({
             type: 'success',
             message: '获取成功'

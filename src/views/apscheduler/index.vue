@@ -27,14 +27,14 @@
       </el-table-column>
       <el-table-column label="任务" min-width="190px" align="center">
         <template slot-scope="{row}">
-          <span>{{ row.project }}</span>
+          <span>{{ row.task_name }}</span>
           &emsp;
           <el-tag>{{ row.env | envFilter }}</el-tag>
         </template>
       </el-table-column>
       <el-table-column label="任务描述" min-width="350px" align="center">
         <template slot-scope="{row}">
-          <a>{{ row.swagger_url }}</a>
+          <a>{{ row.remark }}</a>
         </template>
       </el-table-column>
       <el-table-column label="执行时间" width="100px" align="center">
@@ -53,12 +53,12 @@
 
       <el-table-column label="操作" align="center" width="230" class-name="small-padding fixed-width">
         <template slot-scope="{row}">
-          <el-button v-if="row.status!='1'" size="mini" type="success">
+          <el-button v-if="row.status!='1'" size="mini" type="success" @click="startTask(row)">
             开始
           </el-button>
-<!--          <el-button size="mini" type="danger" @click="handleDelete(row)">-->
-<!--            停止-->
-<!--          </el-button>-->
+          <el-button size="mini" type="danger" @click="stopTask(row)">
+            停止
+          </el-button>
         </template>
       </el-table-column>
 
@@ -133,7 +133,7 @@ export default {
         id: '',
         page: 1,
         limit: 10,
-        project: undefined,
+        task_name: undefined,
         env: undefined
       },
       calendarTypeOptions,
@@ -141,8 +141,8 @@ export default {
       showReviewer: false,
       temp: {
         id: '',
-        project: '',
-        swagger_url: '',
+        task_name: '',
+        remark: '',
         env: '',
         status: 0
       },
