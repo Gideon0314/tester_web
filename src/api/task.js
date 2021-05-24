@@ -8,17 +8,16 @@ export default {
       params: query
     })
   },
-  createProject(data) {
+  resumeTask() {
     return request({
-      url: '/task/add',
-      method: 'post',
-      data
+      url: '/resume/task/:id(\\\\d+)',
+      method: 'get'
     })
   },
-  updateProject(data) {
+  pauseTask() {
     return request({
-      url: '/task/update',
-      method: 'post',
+      url: '/pause/task/:id(\\d+)',
+      method: 'get',
       data
     })
   },

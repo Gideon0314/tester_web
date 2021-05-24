@@ -56,7 +56,7 @@
           <el-button v-if="row.status!='1'" size="mini" type="success" @click="startTask(row)">
             开始
           </el-button>
-          <el-button size="mini" type="danger" @click="stopTask(row)">
+          <el-button size="mini" type="danger" @click="handlePauseTask(row)">
             停止
           </el-button>
         </template>
@@ -196,6 +196,35 @@ export default {
         swagger_url: '',
         status: 0
       }
+    },
+    handlePauseTask(row, status) {
+      this.$confirm('暂停任务', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'info'
+      })
+        .then(async() => {
+          const data = {
+            'id': row.id
+          }
+          row.status = status
+          api.pauseTask(row.task_id).then(response => {
+          this.status = response.data.status
+          // Just to simulate the time of the request
+          setTimeout(() => {
+            this.listLoading = false
+          }, 1.5 * 100)
+          })
+          // await test.test()
+          // this.getList()
+          // setTimeout(() => {
+          // }, 1.5 * 100)
+          this.$message({
+            type: 'success',
+            message: '获取成功'
+          })
+        })
+        .catch(err => { console.error(err) })
     },
     handleCreate() {
       this.resetTemp()
