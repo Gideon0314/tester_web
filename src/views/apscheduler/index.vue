@@ -199,7 +199,7 @@ export default {
         status: ''
       }
     },
-    handlePauseTask(row, status) {
+    handlePauseTask(row) {
       this.$confirm('暂停任务', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
@@ -209,10 +209,7 @@ export default {
           const data = {
             'task_id': row.task_id
           }
-          row.status = status
           api.pauseTask(data).then(response => {
-            this.getList()
-            row.status = 0
             // Just to simulate the time of the request
             // setTimeout(() => {
             //   this.listLoading = false
@@ -226,10 +223,11 @@ export default {
             type: 'success',
             message: '定时任务暂停成功'
           })
+          row.status = 0
         })
         .catch(err => { console.error(err) })
     },
-    handleResumeTask(row, status) {
+    handleResumeTask(row) {
       this.$confirm('开始任务', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
@@ -239,7 +237,6 @@ export default {
           const data = {
             'task_id': row.task_id
           }
-          row.status = status
           api.resumeTask(data).then(response => {
             this.getList()
             row.status = 1
