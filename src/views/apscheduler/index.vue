@@ -37,9 +37,9 @@
           <a>{{ row.remark }}</a>
         </template>
       </el-table-column>
-      <el-table-column label="执行时间" width="100px" align="center">
+      <el-table-column label="下次执行时间" width="160px" align="center">
         <template slot-scope="{row}">
-          <span v-if="row.updated_at">{{ row.updated_at }}</span>
+          <span v-if="row.next_run_time">{{ row.next_run_time }}</span>
           <span v-else>-</span>
         </template>
       </el-table-column>

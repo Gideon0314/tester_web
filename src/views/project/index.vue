@@ -207,37 +207,6 @@ export default {
       })
       row.status = status
     },
-    handleGetApiDocs(row, status) {
-      this.$confirm('开始获取Api文档?', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'info'
-      })
-        .then(async() => {
-          const data = {
-            'id': row.id
-          }
-          row.status = status
-          api.getList(this.listQuery).then(response => {
-          this.list = response.data.items
-          this.total = response.data.total
-          this.status = response.data.status
-          // Just to simulate the time of the request
-          setTimeout(() => {
-            this.listLoading = false
-          }, 1.5 * 100)
-          })
-          // await test.test()
-          // this.getList()
-          // setTimeout(() => {
-          // }, 1.5 * 100)
-          this.$message({
-            type: 'success',
-            message: '获取成功'
-          })
-        })
-        .catch(err => { console.error(err) })
-    },
     resetTemp() {
       this.temp = {
         id: '',
