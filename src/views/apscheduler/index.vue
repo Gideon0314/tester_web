@@ -210,6 +210,9 @@ export default {
             'task_id': row.task_id
           }
           api.pauseTask(data).then(response => {
+            // this.getList()
+            row.status = response.task_status
+            row.next_run_time = null
             // Just to simulate the time of the request
             // setTimeout(() => {
             //   this.listLoading = false
@@ -223,8 +226,7 @@ export default {
             type: 'success',
             message: '定时任务暂停成功'
           })
-          row.status = 0
-          this.getList()
+
         })
         .catch(err => { console.error(err) })
     },
@@ -239,8 +241,9 @@ export default {
             'task_id': row.task_id
           }
           api.resumeTask(data).then(response => {
-            row.status = 1
-            this.getList()
+            row.status = response.task_status
+            row.next_run_time = response.next_run_time
+            // this.getList()
             // Just to simulate the time of the request
             // setTimeout(() => {
             //   this.listLoading = false
