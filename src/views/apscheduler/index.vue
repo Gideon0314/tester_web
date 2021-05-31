@@ -224,6 +224,7 @@ export default {
             message: '定时任务暂停成功'
           })
           row.status = 0
+          this.getList()
         })
         .catch(err => { console.error(err) })
     },
@@ -238,8 +239,8 @@ export default {
             'task_id': row.task_id
           }
           api.resumeTask(data).then(response => {
-            this.getList()
             row.status = 1
+            this.getList()
             // Just to simulate the time of the request
             // setTimeout(() => {
             //   this.listLoading = false
